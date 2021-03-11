@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     try{
                         networkTask.join();
                     }
-                    catch (Exception ex){
+                    catch (InterruptedException ex){
                         Log.e("Error",ex.getMessage());
                     }
 

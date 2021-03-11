@@ -20,27 +20,20 @@ public class NetworkTask extends Thread {
 
     @Override
     public void run() {
-        ServerRequest(_matNum);
-    }
-
-    public String getServerResponse(){
-        return _serverResponse;
-    }
-    public void ServerRequest(String matNumber){
-        //InetSocketAddress host = new InetSocketAddress("https://se2-isys.aau.at",53212);
-
-
         try{
             Socket clientSocket = new Socket("se2-isys.aau.at",53212);
             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
             BufferedReader inFromServer= new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            outToServer.writeBytes(matNumber + "\n");
+            outToServer.writeBytes(_matNum + "\n");
             _serverResponse = inFromServer.readLine();
             clientSocket.close();
         }
         catch (Exception ex){
             Log.e("Error",ex.getMessage());
         }
+    }
+    public String getServerResponse(){
+        return _serverResponse;
     }
 
 }
